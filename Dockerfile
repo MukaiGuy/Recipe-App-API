@@ -21,5 +21,3 @@ ENV PATH="/py/bin:$PATH"
 
 USER django-user
 
-FROM python:3.9-alpine3.13
-
