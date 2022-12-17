@@ -4,13 +4,21 @@ LABEL maintainer='roger@mukaiguy.com'
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /tmp/requirements.txt
+COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
 
+
+ARG DEV=false
 RUN python -m venv /py && \
     /py/bin/pip install --upgrade pip && \
     /py/bin/pip install -r /tmp/requirements.txt && \
+    #Start Dev Logic
+    if [$DEV = 'true']; \
+    then /py/bin/pip install -r /tmp/requirements.dev.txt ;\
+    fi && \
+    #End Dev Logic
     rm -rf /tmp/requirements.txt && \
     adduser \
     --disabled-password \
