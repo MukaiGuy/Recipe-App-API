@@ -150,3 +150,38 @@ we will add a test dir instead (don't forget to add "____init____.py")
 
 Now that we created a 'core' app we need to register in the settings.py file by adding it to the INSTALLED_APPS list
 
+
+
+##### This is what your project should look like at this point
+
+```bash
+.
+├── Dockerfile
+├── MyRequirements.md
+├── NOTES.MD
+├── README.md
+├── app
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── asgi.py
+│   │   ├── calc.py
+│   │   ├── settings.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── migrations
+│   │   ├── models.py
+│   │   └── tests
+│   └── manage.py
+├── docker-compose.yml
+├── requirements.dev.txt
+└── requirements.txt
+
+6 directories, 19 files
+```
+
