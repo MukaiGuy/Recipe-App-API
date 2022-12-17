@@ -19,6 +19,8 @@ djangorestframework>=3.12.4,<3.13
  docker-compose run --rm app sh -c "django-admin startproject app ."
 ```
 
+This is what the file structure should look like at this point.
+
 ```bash
 .
 ├── Dockerfile
