@@ -10,7 +10,6 @@ git init .
  git remote add origin git@github.com:MukaiGuy/{REPO_NAME}
 
 
-
 # Adds new/updated files
 git add .
 
