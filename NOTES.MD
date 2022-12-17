@@ -47,10 +47,55 @@ There are Rate Limits:
 GitHub Actions uses a Shared IP address thus we should Authenticate
 
 ```bash
-docker login
+docker login 
 ```
 
 Add Secrets to the GitHub Project (They are encrypted) 
 
 
+
+### What is Test Driven Development
+
+Its where you write your tests first, knowing it will fail the writing the code that will make it pass.
+
+ 
+
+
+
+unittest.mock allows you to mock an object
+
+- MagicMock/Mick - replace real objects
+-  
+
+
+
+Testing API, 
+
+Make actual API calls
+
+Import APIClient from rest_framework
+
+Check results
+
+Override Authentication
+
+
+
+```py
+from django.test import SimpleTestCase
+from rest_framework.test import APIClient
+
+class TestViews(SimpleTestCase):
+    
+    def test_get_greetings(self):
+        """ Test getting greeting"""
+        client = APIClient()
+        res = client.get('/greeting/')
+        
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(
+        	res.data,
+            ["Hello!", "Hola!"]
+        )
+```
 
