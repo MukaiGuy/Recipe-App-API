@@ -185,3 +185,105 @@ Now that we created a 'core' app we need to register in the settings.py file by 
 6 directories, 19 files
 ```
 
+
+
+### Part 4: Add the wait for DB command
+
+Create a new directory with the 'Core' app called 'Management' and inside that create another directory called 'commands'. Now don't for get to add the ____init____.py file to each new dir. 
+
+Now you can create a wait_for_db.py file in the commands directory. 
+
+The project should look like this
+
+```bash
+.
+├── Dockerfile
+├── MyRequirements.md
+├── NOTES.MD
+├── README.md
+├── app
+│   ├── app
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-39.pyc
+│   │   │   ├── calc.cpython-39.pyc
+│   │   │   ├── settings.cpython-39.pyc
+│   │   │   ├── tests.cpython-39.pyc
+│   │   │   ├── urls.cpython-39.pyc
+│   │   │   └── wsgi.cpython-39.pyc
+│   │   ├── asgi.py
+│   │   ├── calc.py
+│   │   ├── settings.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── management
+│   │   │   ├── __init__.py
+│   │   │   └── commands
+│   │   │       ├── __init__.py
+│   │   │       └── wait_for_db.py
+│   │   ├── migrations
+│   │   │   └── __init__.py
+│   │   ├── models.py
+│   │   └── tests
+│   │       ├── __init__.py
+│   │       └── test_
+│   └── manage.py
+├── docker-compose.yml
+├── requirements.dev.txt
+└── requirements.txt
+
+8 directories, 31 files
+```
+
+
+
+### Unit tests for DB activation
+
+
+
+```python
+"""Test custom Django management commands
+    """
+
+from unittest.mock import patch
+from psycopg2 import OperationalError as Psycopg2Error
+
+from django.core.management import call_command
+from django.db.utils import OperationalError
+from django.test import SimpleTestCase
+
+
+@patch('core.management.commands.wait_for_db.Command.check')
+class CommandTest(SimpleTestCase):
+    """Test Command"""
+
+    def test_wait_for_db_ready(self, patched_check):
+        """Test waiting for db ready"""
+
+        patched_check.return_value = True
+
+        call_command('wait_for_db')
+
+        patched_check.assert_called_once_with(database=["default"])
+
+    @patch('time.sleep')
+    def test_wait_for_db_delay(self, patched_sleep, patched_check):
+        """Test waiting for db when OperationalError"""
+
+        patched_check.side_effects = [Psycopg2Error] * 2 + \
+            [OperationalError] * 3 + [True]
+
+        call_command('wait_for_db')
+
+        self.assertEqual(patched_check.call_count, 6)
+        patched_check.assert_called_with(database=["default"])
+
+
+
+```
+
