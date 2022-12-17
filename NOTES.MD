@@ -99,3 +99,13 @@ class TestViews(SimpleTestCase):
         )
 ```
 
+
+
+## DB Adapter for Django
+
+Psycopg2
+
+
+
+### Race Problem
+
