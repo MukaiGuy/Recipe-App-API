@@ -38,7 +38,7 @@ class AdminSiteTests(TestCase):
 
     def test_edit_user_list(self):
         # Test edit user list
-        url = reverse('admin:core_user_change', args=(self.user.id))
+        url = reverse('admin:core_user_change', args=[self.user.id])
         res = self.client.get(url)
 
         self.assertEqual(res.status_code, 200)
