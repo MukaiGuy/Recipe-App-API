@@ -33,7 +33,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     #    'django.contrib.postgresql',
     'django.contrib.staticfiles',
-    'core'
+    'rest_framework',
+    'drf_spectacular',
+    'core',
+    'user'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Customer user model
 AUTH_USER_MODEL = 'core.User'
+
+# REST API Framework
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}

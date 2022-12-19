@@ -152,3 +152,19 @@ class CommandTest(SimpleTestCase):
 
 ```
 
+
+
+
+
+### Working With Auto Generated API Docs
+
+DjangoREST Framework (drf)
+
+Library
+
+drf-spectacular 
+
+
+
+#### OpenAPI Schema - Swagger
+
