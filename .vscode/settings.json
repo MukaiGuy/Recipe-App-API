@@ -1,0 +1,8 @@
+{
+  "autoDocstring.startOnNewLine": true,
+  "autoDocstring.logLevel": "Debug",
+  "autoDocstring.includeExtendedSummary": false,
+  "autoDocstring.docstringFormat": "numpy",
+  "autoDocstring.guessTypes": false,
+  "autoDocstring.position": false
+}
