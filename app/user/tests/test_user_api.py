@@ -117,7 +117,7 @@ class PublicUserApiTests(TestCase):
         self.assertNotIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
 
-    def test_retrive_user_unauthenticated(self):
+    def test_retrieve_user_unauthorized(self):
         """ Authentication required for users """
         res = self.client.get(ME_URL)
 
@@ -150,21 +150,19 @@ class PrivateUserApiTests(TestCase):
         })
 
     def test_post_me_not_allowed(self):
-        """ Test Authentication required for Profile """
+        """ Test POST Not Allowed """
         res = self.client.post(ME_URL, {})
 
         self.assertEqual(res.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
     def test_update_user_profile(self):
         """ Tests update user Profile"""
-        payload = {'lastname': 'User',
-                   'firstname': 'Test', 'password': 'UpdatedPass123'}
+        payload = {'lastname': 'UpdatedUser',
+                   'firstname': 'UpdatedTest', 'password': 'UpdatedPass123'}
 
         res = self.client.patch(ME_URL, payload)
 
         self.user.refresh_from_db()
         self.assertEqual(self.user.lastname, payload['lastname'])
-        self.assertEqual(self.user.firstname, payload['firstname'])
-        self.assertEqual(self.user.password, payload['password'])
         self.assertTrue(self.user.check_password(payload['password']))
         self.assertEqual(res.status_code, status.HTTP_200_OK)
