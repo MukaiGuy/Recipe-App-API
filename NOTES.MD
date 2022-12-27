@@ -168,3 +168,32 @@ drf-spectacular
 
 #### OpenAPI Schema - Swagger
 
+
+
+## What is a view
+
+- Handles a request made to a URL
+- Django uses functions
+- DRF Uses Classes
+  - Reusable Logic
+  - Override Behavior
+- DRF also supports decorators `@Example`
+- APIView and Viewsets are DRF base classes
+
+### APIView
+
+- Focused around HTTP Methods
+- Class methods for HTTP methods
+  - GET, POST, PUT, PATCH, DELTE
+- Provide flexibility over URLs and Logic
+- Useful for non-CRUD APIs
+  - Create, Read, Update, Delete APIs
+  - Bespoke logic (Auth, jobs, external apis)
+
+### Viewsets
+
+- Focused around actions
+  - Retrieve, list, update, partial update, destroy
+- Map to Django Models
+- User Routers to generate URLs
+- Great for CRUD operations on models

@@ -1,7 +1,7 @@
 """
     Database models
 """
-
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,
@@ -47,3 +47,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
+
+
+class Recipe(models.Model):
+    """ Recipe Object """
+    user = models.ForeignKey(
+        # Referance the settings to prevent hard coding the user model
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    title = models.CharField(("Title"), max_length=255)
+    description = models.TextField(("Description"), blank=True)
+    time_minutes = models.IntegerField(("Time (mins)"),)
+    price = models.DecimalField(("Price"), max_digits=5, decimal_places=2)
+    link = models.CharField(("Link"), max_length=255, blank=True)
+
+    def __str__(self):
+        """ This method returns the string representation of the object. """
+        return self.title
