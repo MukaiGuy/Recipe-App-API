@@ -121,7 +121,8 @@ class PrivateRecipeAPITest(TestCase):
         recipe = Recipe.objects.get(id=res.data['id'])
         # Iterate through the payload
         for k, v in payload.items():
-            # Return the value of the named attribute of object. name must be a string.
+            # Return the value of the named attribute of object
+            # name must be a string.
             self.assertEqual(getattr(recipe, k), v)
         # Checks that the user owns the recipe
         self.assertEqual(recipe.user, self.user)
