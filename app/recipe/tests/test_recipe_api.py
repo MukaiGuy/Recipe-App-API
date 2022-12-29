@@ -42,6 +42,7 @@ def create_recipe(user, **params):
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
 
+
 def create_user(**params):
     """ Create a new user """
     return get_user_model().objects.create(**params)
@@ -173,7 +174,7 @@ class PrivateRecipeAPITest(TestCase):
     def test_update_user_returns_error(self):
         """Test changing the recipe user returns an error"""
 
-        new_user = create_user(email='user2@example.com',password='password2')
+        new_user = create_user(email='user2@example.com', password='password2')
         recipe = create_recipe(user=self.user)
 
         payload = {'user': new_user.id}
