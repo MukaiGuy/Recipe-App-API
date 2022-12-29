@@ -23,9 +23,13 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """ Returns the serializer class """
-        if self.action =='list':
+        if self.action == 'list':
             return serializers.RecipeDetailSerializer
 #        elif self.action == 'upload_image':
 #            return serializers.RecipeImageSerializer
 
         return self.serializer_class
+
+    def perform_create(self, serializer):
+        """ Creates a new recipe """
+        serializer.save(user=self.request.user)

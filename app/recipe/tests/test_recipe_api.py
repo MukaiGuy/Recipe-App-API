@@ -27,7 +27,6 @@ def detail_url(recipe_id):
     return reverse('recipe:recipe-detail', args=(recipe_id))
 
 
-
 def create_recipe(user, **prams):
     """ create and return a Recipe """
     defaults = {
