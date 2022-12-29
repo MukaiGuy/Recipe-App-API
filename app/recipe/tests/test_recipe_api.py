@@ -157,6 +157,7 @@ class PrivateRecipeAPITest(TestCase):
             'title': 'New Title',
             'link': 'http://example.com/new-recipe.pdf',
             'description': 'New Description.',
+            'time_minutes': 10,
             'price': Decimal('2.50'),
         }
 
@@ -189,12 +190,12 @@ class PrivateRecipeAPITest(TestCase):
         url = detail_url(recipe.id)
         res = self.client.delete(url)
 
-        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(res.status_code, status.HTTP_204_NO_CONTENT)
         self.assertFalse(Recipe.objects.filter(id=recipe.id).exists())
 
     def test_delete_other_users_recipe_error(self):
         """Test trying to delete another users recipe"""
-        new_user = create_user(email='user3@example.com',password='password3')
+        new_user = create_user(email='user3@example.com', password='password3')
         recipe = create_recipe(user=new_user)
 
         url = detail_url(recipe.id)
