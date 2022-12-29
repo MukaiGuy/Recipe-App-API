@@ -24,10 +24,10 @@ RECIPES_URL = reverse('recipe:recipe-list')
 
 def detail_url(recipe_id):
     """Create and Return recipe detail URL"""
-    return reverse('recipe:recipe-detail', args=(recipe_id))
+    return reverse('recipe:recipe-detail', args=[recipe_id])
 
 
-def create_recipe(user, **prams):
+def create_recipe(user, **params):
     """ create and return a Recipe """
     defaults = {
         'title': 'Sample recipe',
@@ -37,7 +37,7 @@ def create_recipe(user, **prams):
         'link': 'https://example.com/recipe.pdf',
     }
 
-    defaults.update(prams)
+    defaults.update(params)
 
     recipe = Recipe.objects.create(user=user, **defaults)
     return recipe
