@@ -136,7 +136,7 @@ class PrivateRecipeAPITest(TestCase):
 
         payload = {'title': 'New Title'}
         url = detail_url(recipe.id)
-        res = self.client.patch(url, payload=payload)
+        res = self.client.patch(url, payload)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
@@ -149,7 +149,7 @@ class PrivateRecipeAPITest(TestCase):
         recipe = create_recipe(
             user=self.user,
             title='Sample Title',
-            link='http://example.com/recipe.pdf',
+            link='https://example.com/recipe.pdf',
             description='Sample Description.',
             )
 
@@ -161,7 +161,7 @@ class PrivateRecipeAPITest(TestCase):
         }
 
         url = detail_url(recipe.id)
-        res = self.client.put(url, payload=payload)
+        res = self.client.put(url, payload)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         recipe.refresh_from_db()
@@ -177,7 +177,7 @@ class PrivateRecipeAPITest(TestCase):
 
         payload = {'user': new_user.id}
         url = detail_url(recipe.id)
-        self.client.patch(url, payload=payload)
+        self.client.patch(url, payload)
 
         recipe.refresh_from_db()
         self.assertEqual(recipe.user, self.user)
